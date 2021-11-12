@@ -12,7 +12,7 @@ const httpServer = createServer(function (request, response) {
            response.write(JSON.stringify({
                "description": "Friendly OpenSea Creature that enjoys long swims in the ocean.",
                "name": "Lovelybaby777",
-               "image": "https://github.com/ACS107135/weirdwar-server/blob/master/dog.PNG", 
+               "image": "https://raw.githubusercontent.com/ACS107135/weirdwar-server/master/dog.PNG", 
            }));
            response.end();
            break;
