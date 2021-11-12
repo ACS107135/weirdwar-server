@@ -11,8 +11,8 @@ const httpServer = createServer(function (request, response) {
            response.writeHeader(200, 'Content-Type', 'application/json');
            response.write(JSON.stringify({
                "description": "Friendly OpenSea Creature that enjoys long swims in the ocean.",
-               "name": "Lovelybaby777",
-               "image": "https://weirdwar-server.herokuapp.com/dog.PNG", 
+               "name": "Lovelybaby556",
+               "image": "https://weirdwar-server.herokuapp.com/MC.jpg", 
            }));
            response.end();
            break;
@@ -23,6 +23,13 @@ const httpServer = createServer(function (request, response) {
                response.end();
            });      
            break;
+        case "/MC.jpg":
+            response.writeHeader(200, 'Content-Type', 'image/jpg');
+            fs.readFile(path.substring(1) , (err, data) => {
+                response.write(data);
+                response.end();
+            });      
+            break;
        default:
     response.writeHead(200, { 'Content-Type': 'text/html' });
     response.write('<br>Hello, World.</br>' + (new Date()).toISOString(), 'utf-8');
