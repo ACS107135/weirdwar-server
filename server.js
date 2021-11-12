@@ -11,13 +11,14 @@ const httpServer = createServer(function (request, response) {
            response.writeHeader(200, 'Content-Type', 'application/json');
            response.write(JSON.stringify({
                "description": "Friendly OpenSea Creature that enjoys long swims in the ocean.",
-               "name": "Lovelybaby"
+               "name": "Lovelybaby",
+               "image": "https://weirdwar-server.herokuapp.com/777.jpg", 
            }));
            response.end();
            break;
-       case "/777":
+       case "/777.jpg":
            response.writeHeader(200, 'Content-Type', 'image/jpeg');
-           fs.readFile(path.substring(1) + ".jpg", (err, data) => {
+           fs.readFile(path.substring(1) , (err, data) => {
                response.write(data);
                response.end();
            });      
