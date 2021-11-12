@@ -1,33 +1,33 @@
 'use strict';
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-
+const fs = require("fs"); 
 
 const httpServer = createServer(function (request, response) {
     console.log('Connection');
-    //var path = request.url;
-    //switch (path) {
-    //    case "/0":
-    //        response.writeHeader(200, 'Content-Type', 'application/json');
-    //        response.write(JSON.stringify({
-    //            "description": "Friendly OpenSea Creature that enjoys long swims in the ocean.",
-    //            "name": "Dave Starbelly"
-    //        }));
-    //        response.end();
-    //        break;
-    //    case "/1":
-    //        response.writeHeader(200, 'Content-Type', 'image/jpeg');
-    //        fs.readFile(path.substring(1) + ".jpg", (err, data) => {
-    //            response.write(data);
-    //            response.end();
-    //        });      
-    //        break;
-    //    default:
+    var path = request.url;
+    switch (path) {
+       case "/0":
+           response.writeHeader(200, 'Content-Type', 'application/json');
+           response.write(JSON.stringify({
+               "description": "Friendly OpenSea Creature that enjoys long swims in the ocean.",
+               "name": "Dave Starbelly"
+           }));
+           response.end();
+           break;
+       case "/cute":
+           response.writeHeader(200, 'Content-Type', 'image/gif');
+           fs.readFile(path.substring(1) + ".gif", (err, data) => {
+               response.write(data);
+               response.end();
+           });      
+           break;
+       default:
     response.writeHead(200, { 'Content-Type': 'text/html' });
     response.write('<br>Hello, World.</br>' + (new Date()).toISOString(), 'utf-8');
     console.log(new Date());
     response.end();
-    //}
+    }
 });
 httpServer.listen(process.env.PORT || 8001);
 
