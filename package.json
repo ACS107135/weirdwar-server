@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
     "socket.io": "^4.3.2",
     "socket.io-client": "^4.3.2"
