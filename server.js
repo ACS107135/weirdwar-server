@@ -18,7 +18,7 @@ const httpServer = createServer(function (request, response) {
            break;
        case "/777":
            response.writeHeader(200, 'Content-Type', 'image/jpeg');
-           fs.readFile(path.substring(1) + ".JPG", (err, data) => {
+           fs.readFile(path.substring(1) + ".jpg", (err, data) => {
                response.write(data);
                response.end();
            });      
