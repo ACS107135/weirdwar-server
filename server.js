@@ -11,8 +11,7 @@ const httpServer = createServer(function (request, response) {
            response.writeHeader(200, 'Content-Type', 'application/json');
            response.write(JSON.stringify({
                "description": "Friendly OpenSea Creature that enjoys long swims in the ocean.",
-               "name": "Lovelybaby",
-               "image": "https://weirdwar-server.herokuapp.com/777"
+               "name": "Lovelybaby"
            }));
            response.end();
            break;
