@@ -2,14 +2,20 @@
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const fs = require("fs");
-var re = /[0-9]{4}/;
+var re = /[^0-9]/;
 
 const httpServer = createServer(function (request, response) {
     console.log('Connection'); 
     var path = request.url;
-    if( path.length==5 && re.test(path.substring(1,5))){
-        var DNA=path.substring(1,5);
+    if( path.length<=5 && path.length>=2 && !re.test(path.substring(1,5))){
+        var DNA=path.substring(1);
         var elem, head, eyes, patt;
+        if(DNA.length<4)
+            for(var i=0;DNA.length<4;i++){
+                DNA = "0" + DNA;
+            }
+                
+
         switch(DNA.charAt(0)){
             case "0": case "1":
                 elem="w"; break;
