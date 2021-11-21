@@ -64,6 +64,7 @@ const httpServer = createServer(function (request, response) {
         response.write(JSON.stringify({
             "description": "HELLO!",
             "name": "Gene: "+DNA,
+            "background_color":"#FFF0AC",
             "image": "https://raw.githubusercontent.com/ACS107135/weirdwar-server/master/Gene/"+elem+head+eyes+patt+".png",
             "attributes": [{
                 "trait_type": "Type", 
