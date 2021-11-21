@@ -10,6 +10,7 @@ const httpServer = createServer(function (request, response) {
     if( path.length<=5 && path.length>=2 && !re.test(path.substring(1,5))){
         var DNA=path.substring(1);
         var elem, head, eyes, patt;
+        var type,atama,me,hana;
         if(DNA.length<4)
             for(var i=0;DNA.length<4;i++){
                 DNA = "0" + DNA;
@@ -18,52 +19,68 @@ const httpServer = createServer(function (request, response) {
 
         switch(DNA.charAt(0)){
             case "0": case "1":
-                elem="w"; break;
+                elem="w"; type="Water"; break;
             case "2": case "3":
-                elem="f"; break;
+                elem="f"; type="Fire"; break;
             case "4": case "5":
-                elem="g"; break;
+                elem="g"; type="Grass"; break;
             case "6": case "7":
-                elem="s"; break;
+                elem="s"; type="Light"; break;
             case "8": case "9":
-                elem="d"; break;
+                elem="d"; type="Dark"; break;
         }
         switch(DNA.charAt(1)){
             case "0": case "1": case "2": case "3":
-                head="a"; break;
+                head="a"; atama="Nothing"; break;
             case "4": case "5":
-                head="1"; break;
+                head="1"; atama="Straw Hat"; break;
             case "6": case "7":
-                head="2"; break;
+                head="2"; atama="Bean Sprout"; break;
             case "8": case "9":
-                head="3"; break;
+                head="3"; atama="Wig"; break;
         }
         switch(DNA.charAt(2)){
             case "0": case "1": case "2": case "3":
-                eyes="b"; break;
+                eyes="b"; me="Nothing"; break;
             case "4": case "5":
-                eyes="4"; break;
+                eyes="4"; me="Sunglasses"; break;
             case "6": case "7":
-                eyes="5"; break;
+                eyes="5"; me="Glasses"; break;
             case "8": case "9":
-                eyes="6"; break;
+                eyes="6"; me="Eyelash"; break;
         }
         switch(DNA.charAt(3)){
             case "0": case "1": case "2": case "3":
-                patt="c"; break;
+                patt="c"; hana="Nothing"; break;
             case "4": case "5":
-                patt="7"; break;
+                patt="7"; hana="Circle"; break;
             case "6": case "7":
-                patt="8"; break;
+                patt="8"; hana="Jag"; break;
             case "8": case "9":
-                patt="9"; break;
+                patt="9"; hana="Stripe"; break;
         }
         
         response.writeHeader(200, 'Content-Type', 'application/json');
         response.write(JSON.stringify({
             "description": "HELLO!",
             "name": "Gene: "+DNA,
-            "image": "https://raw.githubusercontent.com/ACS107135/weirdwar-server/master/Gene/"+elem+head+eyes+patt+".png"
+            "image": "https://raw.githubusercontent.com/ACS107135/weirdwar-server/master/Gene/"+elem+head+eyes+patt+".png",
+            "attributes": [{
+                "trait_type": "Type", 
+                "value": type 
+              }, 
+              {
+                "trait_type": "Head", 
+                "value": atama
+              }, 
+              {
+                "trait_type": "Eye", 
+                "value": me
+              }, 
+              {
+                "trait_type": "Pattern", 
+                "value": hana
+              }]
         }));
         response.end();
     }
