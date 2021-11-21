@@ -1,43 +1,75 @@
 'use strict';
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-const fs = require("fs"); 
+const fs = require("fs");
+var re = /[0-9]{4}/;
 
 const httpServer = createServer(function (request, response) {
-    console.log('Connection');
+    console.log('Connection'); 
     var path = request.url;
-    switch (path) {
-       case "/0":
-           response.writeHeader(200, 'Content-Type', 'application/json');
-           response.write(JSON.stringify({
-               "description": "Friendly OpenSea Creature that enjoys long swims in the ocean.",
-               "name": "Lovelybaby556",
-               "image": "https://raw.githubusercontent.com/ACS107135/weirdwar-server/master/0000.png", 
-               "image": "https://raw.githubusercontent.com/ACS107135/weirdwar-server/master/1000.png"
-           }));
-           response.end();
-           break;
-    //    case "/dog.PNG":
-    //        response.writeHeader(200, 'Content-Type', 'image/png');
-    //        fs.readFile(path.substring(1) , (err, data) => {
-    //            response.write(data);
-    //            response.end();
-    //        });      
-    //        break;
-    //     case "/MC.jpg":
-    //         response.writeHeader(200, 'Content-Type', 'image/jpg');
-    //         fs.readFile(path.substring(1) , (err, data) => {
-    //             response.write(data);
-    //             response.end();
-    //         });      
-    //         break;
-       default:
-    response.writeHead(200, { 'Content-Type': 'text/html' });
-    response.write('<br>Hello, World.</br>' + (new Date()).toISOString(), 'utf-8');
-    console.log(new Date());
-    response.end();
+    if( path.length==5 && re.test(path.substring(1,5))){
+        var DNA=path.substring(1,5);
+        var elem, head, eyes, patt;
+        switch(DNA.charAt(0)){
+            case "0": case "1":
+                elem="w"; break;
+            case "2": case "3":
+                elem="f"; break;
+            case "4": case "5":
+                elem="g"; break;
+            case "6": case "7":
+                elem="s"; break;
+            case "8": case "9":
+                elem="d"; break;
+        }
+        switch(DNA.charAt(1)){
+            case "0": case "1": case "2": case "3":
+                head="a"; break;
+            case "4": case "5":
+                head="1"; break;
+            case "6": case "7":
+                head="2"; break;
+            case "8": case "9":
+                head="3"; break;
+        }
+        switch(DNA.charAt(2)){
+            case "0": case "1": case "2": case "3":
+                eyes="b"; break;
+            case "4": case "5":
+                eyes="4"; break;
+            case "6": case "7":
+                eyes="5"; break;
+            case "8": case "9":
+                eyes="6"; break;
+        }
+        switch(DNA.charAt(3)){
+            case "0": case "1": case "2": case "3":
+                patt="c"; break;
+            case "4": case "5":
+                patt="7"; break;
+            case "6": case "7":
+                patt="8"; break;
+            case "8": case "9":
+                patt="9"; break;
+        }
+        
+        response.writeHeader(200, 'Content-Type', 'application/json');
+        response.write(JSON.stringify({
+            "description": "HELLO!",
+            "name": "Gene: "+DNA,
+            "image": "https://raw.githubusercontent.com/ACS107135/weirdwar-server/master/Gene/"+elem+head+eyes+patt+".png"
+        }));
+        response.end();
     }
+    else{
+        response.writeHead(200, { 'Content-Type': 'text/html' });
+        response.write('<br>Hello, World.</br>' + (new Date()).toISOString(), 'utf-8');
+        console.log(new Date());
+        response.end();
+    }
+    
 });
+
 httpServer.listen(process.env.PORT || 8001);
 
 const io = new Server(httpServer, {});
@@ -155,3 +187,10 @@ io.on("connection", (socket) => {
 
 
 
+// case "/dog.PNG":
+            //     response.writeHeader(200, 'Content-Type', 'image/png');
+            //     fs.readFile(path.substring(1) , (err, data) => {
+            //         response.write(data);
+            //         response.end();
+            //     });      
+            //     break;
