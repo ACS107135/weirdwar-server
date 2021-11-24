@@ -7,6 +7,7 @@ var re = /[^0-9]/;
 const httpServer = createServer(function (request, response) {
     console.log('Connection'); 
     var path = request.url;
+    
     if( path.length<=5 && path.length>=2 && !re.test(path.substring(1,5))){
         var DNA=path.substring(1);
         var elem, head, eyes, patt;
@@ -60,7 +61,10 @@ const httpServer = createServer(function (request, response) {
                 patt="9"; hana="Stripe"; break;
         }
         
-        response.writeHeader(200, 'Content-Type', 'application/json');
+        response.writeHeader(200,{'Content-Type': 'application/json',
+            "Access-Control-Allow-Headers" : "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET"});
         response.write(JSON.stringify({
             "description": "HELLO!",
             "name": "Gene: "+DNA,
