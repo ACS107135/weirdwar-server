@@ -156,10 +156,10 @@ function funGame(player1, player2) {
     player1.socket.emit('start', { 'player_id': "1" });                 //遊戲開始訊號
     player2.socket.emit('start', { 'player_id': "2" });
 
-    player1.sokcet.on('firstsubmit', (myTeam) => {
+    player1.sokcet.on('firstsubmit', function(myTeam) {
         player2.socket.emit('firstenemy', myTeam);
     });
-    player2.sokcet.on('firstsubmit', (myTeam) => {
+    player2.sokcet.on('firstsubmit', function(myTeam) {
         player1.socket.emit('firstenemy', myTeam);
     });
 
