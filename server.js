@@ -5,7 +5,6 @@ const fs = require("fs");
 var re = /[^0-9]/;
 
 const httpServer = createServer(function (request, response) {
-    console.log('Connection');
     var path = request.url;
 
     if (path.length <= 5 && path.length >= 2 && !re.test(path.substring(1, 5))) {
