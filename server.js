@@ -196,10 +196,10 @@ function funGame(player1, player2) {
         player1.socket.emit('newturn', myTeam);
     });
 
-    player1.sokcet.on('burncell', (burnedCells) => {
+    player1.socket.on('burncell', (burnedCells) => {
         player2.socket.emit('burncell', burnedCells);
     });
-    player2.sokcet.on('burncell', (burnedCells) => {
+    player2.socket.on('burncell', (burnedCells) => {
         player1.socket.emit('burncell', burnedCells);
     });
 
