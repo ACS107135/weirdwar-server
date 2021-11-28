@@ -157,10 +157,10 @@ function funGame(player1, player2) {
     player2.socket.emit('start', { 'player_id': "2" });
 
     player1.sokcet.on('firstsubmit', function(myTeam) {
-        player2.socket.emit('firstenemy', myTeam);
+        player2.socket.emit('firstenemy', stringify(myTeam));
     });
     player2.sokcet.on('firstsubmit', function(myTeam) {
-        player1.socket.emit('firstenemy', myTeam);
+        player1.socket.emit('firstenemy', stringify(myTeam));
     });
 
     // player1.socket.on('message', function (data) {                      //p1傳給p2
