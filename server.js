@@ -157,7 +157,6 @@ function funGame(player1, player2) {
     player2.socket.emit('start', { 'player_id': "2" });
 
     player1.socket.on('firstsubmit', (myTeam)=> {
-        console.log(myTeam);
         player2.socket.emit('firstenemy', myTeam);
     });
     player2.socket.on('firstsubmit', (myTeam)=> {
@@ -173,10 +172,12 @@ function funGame(player1, player2) {
 
     player1.socket.on('victory', (data) => {                           //接收到遊戲結束訊號
         console.log("遊戲結束");
+        player2.socket.emit('gameover');
         endaction();
     });
     player2.socket.on('victory', (data) => {
         console.log("遊戲結束");
+        player1.socket.emit('gameover');
         endaction();
     });
 
