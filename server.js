@@ -138,6 +138,7 @@ function funGame(player1, player2) {
         //player1.socket.removeAllListeners('message');
         player1.socket.removeAllListeners('surrender');
         player1.socket.removeAllListeners('endturn');
+        player1.socket.removeAllListeners('attack');
         player1.socket.removeAllListeners('burncell');
         player1.socket.removeAllListeners('darkswap');
         player2.socket.removeAllListeners('victory');
@@ -146,6 +147,7 @@ function funGame(player1, player2) {
         //player2.socket.removeAllListeners('message');
         player2.socket.removeAllListeners('surrender');
         player2.socket.removeAllListeners('endturn');
+        player2.socket.removeAllListeners('attack');
         player2.socket.removeAllListeners('burncell');
         player2.socket.removeAllListeners('darkswap');
     }
@@ -195,6 +197,13 @@ function funGame(player1, player2) {
     });
     player2.socket.on('endturn', (myTeam) => {
         player1.socket.emit('newturn', myTeam);
+    });
+
+    player1.socket.on('attack',(enemyTeam)=>{
+        player2.socket.emit('gotattacked',enemyTeam);
+    });
+    player2.socket.on('attack',(enemyTeam)=>{
+        player1.socket.emit('gotattacked',enemyTeam);
     });
 
     player1.socket.on('burncell', (burnedCells) => {
